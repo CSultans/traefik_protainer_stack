@@ -36,7 +36,7 @@ services:
       - ./localtime:/etc/localtime:ro                                        # Set the container timezone by sharing the read-only localtime
       - ./config/dynamic_config.yml:/etc/traefik/config.yml:ro            # Set the dynamic configuration for the file provider
       - ./config/traefik.yml:/etc/traefik/traefik.yml:ro          # Set the static configuration
-      - ./cert:/etc/traefik/acme                                      # Set the location where my ACME certificates are saved to
+      # - ./cert:/etc/traefik/acme                                      # Set the location where my ACME certificates are saved to
       - /var/run/docker.sock:/var/run/docker.sock:ro                            # Give access to the UNIX Docker socket
 
 networks:
