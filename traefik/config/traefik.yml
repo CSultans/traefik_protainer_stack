@@ -11,7 +11,7 @@ certificatesResolvers:
   letsEncrypt:
     acme:
       email: "sajidk25@gmail.com"  # Email address used for registration
-      storage: "/traefik/cert/acme.json"    # [Attention] File or key used for certificates storage
+      storage: "/cert/acme.json"    # [Attention] File or key used for certificates storage
       tlsChallenge: {}
 
 entryPoints:
