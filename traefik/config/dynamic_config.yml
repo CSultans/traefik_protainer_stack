@@ -5,7 +5,7 @@ http:
     traefikAuth:
       basicAuth:
         users:
-          - "admin:$$2y$$05$$KqQF/K.1X8A5xQ6sWC7xceI5/Vq7VHsLTVADy4Pe/QUBHWr2WRmTe" # [Attention]
+          - "admin:$$2y$$05$$ul8RhfJnu3e1wvDlEwaP4.P4odFdIh0asQ4rfANVkhjpPJMFW2BE6" # [Attention]
 
     # Recommended default middleware for most of the services
     # Use with traefik.http.routers.myRouter.middlewares: "default@file"
