@@ -23,7 +23,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.pgdbadmin.entrypoints: "https"
       traefik.http.routers.pgdbadmin.middlewares: "default@file"
-      traefik.http.routers.pgdbadmin.rule: "Host(`pgdbadmin.t99ltd.info`)"
+      traefik.http.routers.pgdbadmin.rule: "Host(`db.t99ltd.info`)"
       traefik.http.routers.pgdbadmin.tls.certresolver: "letsEncrypt"
       traefik.http.routers.pgdbadmin.tls.options: "modern@file"
       traefik.http.routers.pgdbadmin.tls: "true"
