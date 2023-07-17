@@ -1,0 +1,49 @@
+---
+version: "3"
+
+services:
+  # --- PHP
+  php:
+    container_name: php
+    image: bitnami/php-fpm:8.1.14
+    privileged: false
+    networks:
+      - traefik-net
+      - default
+    labels:
+      - traefik.enable=false
+    volumes:
+      - ./data:/app:delegated
+      - ./config/php.ini:/opt/bitnami/php/etc/conf.d/php.ini:ro
+  # --- nginx
+  web:
+    image: nginx:latest
+    container_name: nginx
+    privileged: false
+    labels:
+      traefik.docker.network: "traefik-net"
+      traefik.enable: "true"
+      traefik.http.routers.nginx.entrypoints: "https"
+      traefik.http.routers.nginx.middlewares: "default@file"
+      traefik.http.routers.nginx.rule: "Host(`nginx.t99ltd.info`)"
+      traefik.http.routers.nginx.tls.certresolver: "letsEncrypt"
+      traefik.http.routers.nginx.tls.options: "modern@file"
+      traefik.http.routers.nginx.tls: "true"
+      traefik.http.services.nginx.loadbalancer.server.port: 80
+      traefik.http.services.nginx.loadbalancer.sticky.cookie.httpOnly: "true"
+      traefik.http.services.nginx.loadbalancer.sticky.cookie.secure: "true"
+    restart: always
+    volumes:
+        - ./data:/app:delegated
+        - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+        - php
+    networks:
+      - traefik-net
+      - default
+
+networks:
+  traefik-net:
+    driver: overlay
+    external: true 
+
