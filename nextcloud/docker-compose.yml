@@ -54,7 +54,6 @@ services:
       - app
     volumes:
       - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
-    volumes_from:
       - ./next_cloud:/var/www/html
     networks:
       - traefik-net
