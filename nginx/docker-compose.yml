@@ -8,6 +8,7 @@ services:
     image: php:8.3-rc-fpm
     networks:
       - default
+      - traefik-net
     labels:
       - traefik.enable=false
     volumes:
