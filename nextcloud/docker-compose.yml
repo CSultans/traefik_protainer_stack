@@ -45,6 +45,7 @@ services:
       traefik.http.services.nextcloud_web.loadbalancer.server.port: 80
       traefik.http.services.nextcloud_web.loadbalancer.sticky.cookie.httpOnly: "true"
       traefik.http.services.nextcloud_web.loadbalancer.sticky.cookie.secure: "true"
+      traefik.http.routers.nextcloud.middlewares: 'nextcloud_redirectregex'
       traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent: true
       traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex: 'https://(.*)/.well-known/(?:card|cal)dav'
       traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement: 'https://$${1}/remote.php/dav'
