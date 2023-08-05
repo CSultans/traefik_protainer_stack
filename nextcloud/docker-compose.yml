@@ -32,7 +32,8 @@ services:
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
       - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER}
-      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}   
+      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}  
+      - TRUSTED_PROXIES="10.0.0.0/16"
     labels:
       traefik.docker.network: "traefik-net"
       traefik.enable: "true"
