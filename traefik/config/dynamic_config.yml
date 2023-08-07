@@ -16,7 +16,9 @@ http:
           - default-security-headers
           - error-pages
           - gzip
-          - nextcloud-redirectregex
+          # - nextcloud-redirectregex
+          - nextcloud-redirect
+          - nextcloud-webfinger
 
     # Add automatically some security headers
     # Use with traefik.http.routers.myRouter.middlewares: "default-security-headers@file"
@@ -37,6 +39,15 @@ http:
         permanent: true
         regex: 'https://(.*)/.well-known/(?:card|cal)dav'
         replacement: 'https://$${1}/remote.php/dav'
+
+    nextcloud-redirect:
+        replacepathregex:
+          regex: "^/.well-known/ca(l|rd)dav"
+          replacement: "/remote.php/dav/"
+    nextcloud-webfinger:
+        replacepathregex:
+          regex: "^(/.well-known.*)"
+          replacement: "/index.php$${1}"
 
     # Serve the error pages when the status is included inside the following ranges
     # Use with traefik.http.routers.myRouter.middlewares: "error-pages@file"
