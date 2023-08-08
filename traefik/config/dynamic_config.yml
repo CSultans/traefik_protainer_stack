@@ -17,10 +17,9 @@ http:
           - error-pages
           - gzip
           - nextcloud
-          # - nextcloud-redirectregex
           - nextcloud-redirect
           - nextcloud-webfinger
-
+          # - nextcloud-redirectregex
     # Add automatically some security headers
     # Use with traefik.http.routers.myRouter.middlewares: "default-security-headers@file"
     default-security-headers:
@@ -50,7 +49,7 @@ http:
 
     nextcloud-redirect:
         replacepathregex:
-          regex: "^/.well-known/ca(l|rd)dav"
+          regex: "^/.well-known/(cal|card)dav"
           replacement: "/remote.php/dav/"
     nextcloud-webfinger:
         replacepathregex:
