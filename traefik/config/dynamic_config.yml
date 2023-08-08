@@ -16,6 +16,7 @@ http:
           - default-security-headers
           - error-pages
           - gzip
+          - nextcloud
           # - nextcloud-redirectregex
           - nextcloud-redirect
           - nextcloud-webfinger
