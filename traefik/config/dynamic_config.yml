@@ -19,6 +19,7 @@ http:
           - nextcloud
           - nextcloud-redirect
           - nextcloud-webfinger
+          - nextcloud-nodeinfo
           # - nextcloud-redirectregex
     # Add automatically some security headers
     # Use with traefik.http.routers.myRouter.middlewares: "default-security-headers@file"
@@ -53,8 +54,14 @@ http:
           replacement: "/remote.php/dav/"
     nextcloud-webfinger:
         replacepathregex:
-          regex: "^(/.well-known.*)"
-          replacement: "/index.php$${1}"
+          regex: "^/.well-known/webfinger"
+          replacement: "/index.php/.well-known/webfinger"
+          #regex: "^(/.well-known.*)"
+          #replacement: "/index.php$${1}"
+    nextcloud-nodeinfo:
+        replacepathregex:
+          regex: "^/.well-known/nodeinfo"
+          replacement: "/index.php/.well-known/nodeinfo"
 
     # Serve the error pages when the status is included inside the following ranges
     # Use with traefik.http.routers.myRouter.middlewares: "error-pages@file"
