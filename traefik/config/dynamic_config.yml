@@ -54,7 +54,7 @@ http:
       redirectRegex:
         permanent: true
         regex: 'https://([^/]*)(/.well-known[^#]*)'
-        replacement: 'https://${1}/index.php${2}'
+        replacement: 'https://$${1}/index.php$${2}'
     # nextcloud-redirectregex:
     #   redirectregex:
     #     permanent: true
