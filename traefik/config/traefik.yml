@@ -1,7 +1,6 @@
 # Traefik static configuration file (/etc/traefik/traefik.yml)
 # See https://doc.traefik.io/traefik/getting-started/configuration-overview/#the-static-configuration
 # and https://doc.traefik.io/traefik/reference/static-configuration/cli/
-
 api:
   dashboard: true                             # Enable the dashboard
 
