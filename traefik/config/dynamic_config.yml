@@ -15,10 +15,13 @@ http:
         middlewares:
           - default-security-headers
           - nextcloud
-          - nextcloud-redirect
-          - nextcloud-redirectregex2
-          - nextcloud-webfinger
-          - nextcloud-nodeinfo
+          - rpl-caldav-cardav
+          - rpl-nodeinfo
+          - rpl-webfinger
+          # - nextcloud-redirect
+          # - nextcloud-redirectregex2
+          # - nextcloud-webfinger
+          # - nextcloud-nodeinfo
           # - nextcloud-redirectregex
           # - nextcloud-redirectregex1
           - error-pages
@@ -44,17 +47,30 @@ http:
         customFrameOptionsValue: "SAMEORIGIN"
         customRequestHeaders: 
           X-Forwarded-Proto: https
-    nextcloud-redirect:
-      redirectRegex:
-        permanent: true
-        regex: "https://(.*)/.well-known/(card|cal)dav"
-        replacement: "https://${1}/remote.php/dav/"
 
-    nextcloud-redirectregex2:
-      redirectRegex:
-        permanent: true
-        regex: 'https://([^/]*)(/.well-known[^#]*)'
-        replacement: 'https://$${1}/index.php$${2}'
+    rpl-caldav-cardav:
+      replacepathregex:
+        regex: ^/.well-known/ca(l|rd)dav
+        replacement: /remote.php/dav/
+    rpl-nodeinfo:
+      replacepathregex:
+        regex: ^/.well-known/nodeinfo
+        replacement: /index.php/.well-known/nodeinfo
+    rpl-webfinger:
+      replacepathregex:
+        regex: ^/.well-known/webfinger
+        replacement: /index.php/.well-known/webfinger
+    # nextcloud-redirect:
+    #   redirectRegex:
+    #     permanent: true
+    #     regex: "https://(.*)/.well-known/(card|cal)dav"
+    #     replacement: "https://${1}/remote.php/dav/"
+
+    # nextcloud-redirectregex2:
+    #   redirectRegex:
+    #     permanent: true
+    #     regex: 'https://([^/]*)(/.well-known[^#]*)'
+    #     replacement: 'https://$${1}/index.php$${2}'
     # nextcloud-redirectregex:
     #   redirectregex:
     #     permanent: true
@@ -75,16 +91,16 @@ http:
     #     replacepathregex:
     #       regex: "^/.well-known/(cal|card)dav"
     #       replacement: "/remote.php/dav/"
-    nextcloud-webfinger:
-        replacepathregex:
-          regex: "^/.well-known/webfinger"
-          replacement: "/index.php/.well-known/webfinger"
-          #regex: "^(/.well-known.*)"
-          #replacement: "/index.php$${1}"
-    nextcloud-nodeinfo:
-        replacepathregex:
-          regex: "^/.well-known/nodeinfo"
-          replacement: "/index.php/.well-known/nodeinfo"
+    # nextcloud-webfinger:
+    #     replacepathregex:
+    #       regex: "^/.well-known/webfinger"
+    #       replacement: "/index.php/.well-known/webfinger"
+    #       #regex: "^(/.well-known.*)"
+    #       #replacement: "/index.php$${1}"
+    # nextcloud-nodeinfo:
+    #     replacepathregex:
+    #       regex: "^/.well-known/nodeinfo"
+    #       replacement: "/index.php/.well-known/nodeinfo"
 
     # Serve the error pages when the status is included inside the following ranges
     # Use with traefik.http.routers.myRouter.middlewares: "error-pages@file"
