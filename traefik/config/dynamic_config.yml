@@ -13,7 +13,7 @@ http:
     default:
       chain:
         middlewares:
-          # - default-security-headers
+          - default-security-headers
           - nextcloud
           # - rpl-caldav-cardav
           # - rpl-nodeinfo
