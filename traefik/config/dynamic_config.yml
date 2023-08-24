@@ -18,8 +18,8 @@ http:
           # - nextcloud-redirect
           # - nextcloud-webfinger
           # - nextcloud-nodeinfo
-          - nextcloud-redirectregex
-          - nextcloud-redirectregex1
+          # - nextcloud-redirectregex
+          # - nextcloud-redirectregex1
           - error-pages
           - gzip
     # Add automatically some security headers
@@ -43,16 +43,21 @@ http:
         customFrameOptionsValue: "SAMEORIGIN"
         customRequestHeaders: 
           X-Forwarded-Proto: https
-    nextcloud-redirectregex:
-      redirectregex:
+    nextcloud-redirect:
+      redirectRegex:
         permanent: true
-        regex: 'https?://(.*)/.well-known/(card|cal)dav'
-        replacement: 'https://$${1}/remote.php/dav/'
-    nextcloud-redirectregex1:
-      redirectregex:
-        permanent: true
-        regex: 'https?://([^/]*)(/.well-known[^#]*)'
-        replacement: 'https://$${1}/index.php$${2}'
+        regex: "https://(.*)/.well-known/(card|cal)dav"
+        replacement: "https://${1}/remote.php/dav/"
+    # nextcloud-redirectregex:
+    #   redirectregex:
+    #     permanent: true
+    #     regex: 'https?://(.*)/.well-known/(card|cal)dav'
+    #     replacement: 'https://$${1}/remote.php/dav/'
+    # nextcloud-redirectregex1:
+    #   redirectregex:
+    #     permanent: true
+    #     regex: 'https?://([^/]*)(/.well-known[^#]*)'
+    #     replacement: 'https://$${1}/index.php$${2}'
     # nextcloud-redirectregex:
     #   redirectregex:
     #     permanent: true
