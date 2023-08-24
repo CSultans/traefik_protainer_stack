@@ -50,7 +50,7 @@ http:
         regex: "https://(.*)/.well-known/(card|cal)dav"
         replacement: "https://${1}/remote.php/dav/"
 
-     nextcloud-redirectregex2:
+    nextcloud-redirectregex2:
       redirectRegex:
         permanent: true
         regex: 'https://([^/]*)(/.well-known[^#]*)'
