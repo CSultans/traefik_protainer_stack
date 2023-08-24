@@ -16,6 +16,7 @@ http:
           - default-security-headers
           - nextcloud
           - nextcloud-redirect
+          - nextcloud-redirectregex2
           # - nextcloud-webfinger
           # - nextcloud-nodeinfo
           # - nextcloud-redirectregex
@@ -48,6 +49,12 @@ http:
         permanent: true
         regex: "https://(.*)/.well-known/(card|cal)dav"
         replacement: "https://${1}/remote.php/dav/"
+
+     nextcloud-redirectregex2:
+      redirectRegex:
+        permanent: true
+        regex: 'https://([^/]*)(/.well-known[^#]*)'
+        replacement: 'https://${1}/index.php${2}'
     # nextcloud-redirectregex:
     #   redirectregex:
     #     permanent: true
