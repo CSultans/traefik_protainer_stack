@@ -15,7 +15,7 @@ http:
         middlewares:
           - default-security-headers
           - nextcloud
-          # - nextcloud-redirect
+          - nextcloud-redirect
           # - nextcloud-webfinger
           # - nextcloud-nodeinfo
           # - nextcloud-redirectregex
