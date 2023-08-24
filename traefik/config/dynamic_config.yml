@@ -15,15 +15,15 @@ http:
         middlewares:
           - default-security-headers
           - nextcloud
-          - rpl-caldav-cardav
-          - rpl-nodeinfo
-          - rpl-webfinger
+          # - rpl-caldav-cardav
+          # - rpl-nodeinfo
+          # - rpl-webfinger
           # - nextcloud-redirect
           # - nextcloud-redirectregex2
           # - nextcloud-webfinger
           # - nextcloud-nodeinfo
-          # - nextcloud-redirectregex
-          # - nextcloud-redirectregex1
+          - nextcloud-redirectregex
+          - nextcloud-redirectregex1
           - error-pages
           - gzip
     # Add automatically some security headers
@@ -48,18 +48,18 @@ http:
         customRequestHeaders: 
           X-Forwarded-Proto: https
 
-    rpl-caldav-cardav:
-      replacepathregex:
-        regex: ^/.well-known/ca(l|rd)dav
-        replacement: /remote.php/dav/
-    rpl-nodeinfo:
-      replacepathregex:
-        regex: ^/.well-known/nodeinfo
-        replacement: /index.php/.well-known/nodeinfo
-    rpl-webfinger:
-      replacepathregex:
-        regex: ^/.well-known/webfinger
-        replacement: /index.php/.well-known/webfinger
+    # rpl-caldav-cardav:
+    #   replacepathregex:
+    #     regex: ^/.well-known/ca(l|rd)dav
+    #     replacement: /remote.php/dav/
+    # rpl-nodeinfo:
+    #   replacepathregex:
+    #     regex: ^/.well-known/nodeinfo
+    #     replacement: /index.php/.well-known/nodeinfo
+    # rpl-webfinger:
+    #   replacepathregex:
+    #     regex: ^/.well-known/webfinger
+    #     replacement: /index.php/.well-known/webfinger
     # nextcloud-redirect:
     #   redirectRegex:
     #     permanent: true
@@ -71,16 +71,16 @@ http:
     #     permanent: true
     #     regex: 'https://([^/]*)(/.well-known[^#]*)'
     #     replacement: 'https://$${1}/index.php$${2}'
-    # nextcloud-redirectregex:
-    #   redirectregex:
-    #     permanent: true
-    #     regex: 'https?://(.*)/.well-known/(card|cal)dav'
-    #     replacement: 'https://$${1}/remote.php/dav/'
-    # nextcloud-redirectregex1:
-    #   redirectregex:
-    #     permanent: true
-    #     regex: 'https?://([^/]*)(/.well-known[^#]*)'
-    #     replacement: 'https://$${1}/index.php$${2}'
+    nextcloud-redirectregex:
+      redirectregex:
+        permanent: true
+        regex: 'https?://(.*)/.well-known/(card|cal)dav'
+        replacement: 'https://$${1}/remote.php/dav/'
+    nextcloud-redirectregex1:
+      redirectregex:
+        permanent: true
+        regex: 'https?://([^/]*)(/.well-known[^#]*)'
+        replacement: 'https://$${1}/index.php$${2}'
     # nextcloud-redirectregex:
     #   redirectregex:
     #     permanent: true
