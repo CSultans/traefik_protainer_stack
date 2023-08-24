@@ -14,13 +14,13 @@ http:
       chain:
         middlewares:
           - default-security-headers
-          - error-pages
-          - gzip
           - nextcloud
           - nextcloud-redirect
           - nextcloud-webfinger
           - nextcloud-nodeinfo
           # - nextcloud-redirectregex
+          - error-pages
+          - gzip
     # Add automatically some security headers
     # Use with traefik.http.routers.myRouter.middlewares: "default-security-headers@file"
     default-security-headers:
@@ -29,7 +29,7 @@ http:
         contentTypeNosniff: true                          # X-Content-Type-Options=nosniff
         forceSTSHeader: true                              # Add the Strict-Transport-Security header even when the connection is HTTP
         frameDeny: false                                   # X-Frame-Options=deny
-        referrerPolicy: "strict-origin-when-cross-origin"
+        #referrerPolicy: "strict-origin-when-cross-origin"
         sslRedirect: true                                 # Allow only https requests
         stsIncludeSubdomains: true                        # Add includeSubdomains to the Strict-Transport-Security header
         stsPreload: true                                  # Add preload flag appended to the Strict-Transport-Security header
@@ -45,23 +45,33 @@ http:
     nextcloud-redirectregex:
       redirectregex:
         permanent: true
-        regex: 'https://(.*)/.well-known/(?:card|cal)dav'
-        replacement: 'https://$${1}/remote.php/dav'
+        regex: 'https?://(.*)/.well-known/(card|cal)dav'
+        replacement: 'https://$${1}/remote.php/dav/'
+    nextcloud-redirectregex1:
+      redirectregex:
+        permanent: true
+        regex: 'https?://([^/]*)(/.well-known[^#]*)'
+        replacement: 'https://$${1}/index.php$${2}'
+    # nextcloud-redirectregex:
+    #   redirectregex:
+    #     permanent: true
+    #     regex: 'https://(.*)/.well-known/(?:card|cal)dav'
+    #     replacement: 'https://$${1}/remote.php/dav'
 
-    nextcloud-redirect:
-        replacepathregex:
-          regex: "^/.well-known/(cal|card)dav"
-          replacement: "/remote.php/dav/"
-    nextcloud-webfinger:
-        replacepathregex:
-          regex: "^/.well-known/webfinger"
-          replacement: "/index.php/.well-known/webfinger"
-          #regex: "^(/.well-known.*)"
-          #replacement: "/index.php$${1}"
-    nextcloud-nodeinfo:
-        replacepathregex:
-          regex: "^/.well-known/nodeinfo"
-          replacement: "/index.php/.well-known/nodeinfo"
+    # nextcloud-redirect:
+    #     replacepathregex:
+    #       regex: "^/.well-known/(cal|card)dav"
+    #       replacement: "/remote.php/dav/"
+    # nextcloud-webfinger:
+    #     replacepathregex:
+    #       regex: "^/.well-known/webfinger"
+    #       replacement: "/index.php/.well-known/webfinger"
+    #       #regex: "^(/.well-known.*)"
+    #       #replacement: "/index.php$${1}"
+    # nextcloud-nodeinfo:
+    #     replacepathregex:
+    #       regex: "^/.well-known/nodeinfo"
+    #       replacement: "/index.php/.well-known/nodeinfo"
 
     # Serve the error pages when the status is included inside the following ranges
     # Use with traefik.http.routers.myRouter.middlewares: "error-pages@file"

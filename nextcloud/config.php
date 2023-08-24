@@ -19,7 +19,7 @@ $CONFIG = array (
   ),
   'trusted_proxies' => 
   array (
-    0 => '"10.0.0.0/16"',
+    0 => '10.0.0.0/16',
   ),
   'passwordsalt' => 'y2b8MidqySc+HzQxtXovXBWB7bwqUA',
   'secret' => 'q9Ojk4svqMmHTmvsrt/cGWkaUUcaJs0QfL1pzxvpWAKWHZHf',
@@ -29,7 +29,7 @@ $CONFIG = array (
   ),
   'datadirectory' => '/var/www/html/data',
   'dbtype' => 'mysql',
-  'version' => '27.0.1.2',
+  'version' => '27.0.2.1',
   'overwriteprotocol' => 'https',
   'overwrite.cli.url' => 'https://nextcloud.t99ltd.info',
   'dbname' => 'nextcloud',
