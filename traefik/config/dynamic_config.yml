@@ -15,10 +15,11 @@ http:
         middlewares:
           - default-security-headers
           - nextcloud
-          - nextcloud-redirect
-          - nextcloud-webfinger
-          - nextcloud-nodeinfo
-          # - nextcloud-redirectregex
+          # - nextcloud-redirect
+          # - nextcloud-webfinger
+          # - nextcloud-nodeinfo
+          - nextcloud-redirectregex
+          - nextcloud-redirectregex1
           - error-pages
           - gzip
     # Add automatically some security headers
