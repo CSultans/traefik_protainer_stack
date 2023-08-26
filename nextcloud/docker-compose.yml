@@ -38,7 +38,7 @@ services:
       traefik.docker.network: "traefik-net"
       traefik.enable: "true"
       traefik.http.routers.nextcloud_web.entrypoints: "https"
-      traefik.http.routers.nextcloud_web.middlewares: "default@file,nextcloud-redirectregex1,nextcloud-redirectregex2"
+      traefik.http.routers.nextcloud_web.middlewares: "default@file"
       traefik.http.routers.nextcloud_web.rule: "Host(`t99ltd.info`)"
       traefik.http.routers.nextcloud_web.tls.certresolver: "letsEncrypt"
       traefik.http.routers.nextcloud_web.tls.options: "modern@file"
@@ -46,13 +46,6 @@ services:
       traefik.http.services.nextcloud_web.loadbalancer.server.port: 80
       traefik.http.services.nextcloud_web.loadbalancer.sticky.cookie.httpOnly: "true"
       traefik.http.services.nextcloud_web.loadbalancer.sticky.cookie.secure: "true"
-      # - "traefik.http.routers.nextcloud.middlewares=nextcloud-redirectregex1,nextcloud-redirectregex2"
-      traefik.http.middlewares.nextcloud-redirectregex1.redirectregex.permanent: "true"
-      traefik.http.middlewares.nextcloud-redirectregex1.redirectregex.regex: "https?://([^/]*)/.well-known/(card|cal)dav"
-      traefik.http.middlewares.nextcloud-redirectregex1.redirectregex.replacement: "https://$${1}/remote.php/dav/"
-      traefik.http.middlewares.nextcloud-redirectregex2.redirectregex.permanent: "true"
-      traefik.http.middlewares.nextcloud-redirectregex2.redirectregex.regex: "https?://([^/]*)(/.well-known[^#]*)"
-      traefik.http.middlewares.nextcloud-redirectregex2.redirectregex.replacement: "https://$${1}/index.php$${2}"
     networks:
       - traefik-net
       - default
